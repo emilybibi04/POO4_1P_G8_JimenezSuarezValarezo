@@ -9,7 +9,6 @@ package MainPackage;
  * @author emilyvalarezo
  */
 public class SistemaVehicular {
-    public static void main(String[] args){
-        System.out.println("Holaa");
+    public static void main(String[] args){    
     }
 }
