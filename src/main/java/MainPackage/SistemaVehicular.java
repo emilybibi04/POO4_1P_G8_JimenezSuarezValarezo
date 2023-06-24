@@ -8,7 +8,7 @@ package MainPackage;
  *
  * @author emilyvalarezo
  */
-public class Main {
+public class SistemaVehicular {
     public static void main(String[] args){
         
     }
