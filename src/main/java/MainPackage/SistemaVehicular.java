@@ -4,6 +4,10 @@
  */
 package MainPackage;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author emilyvalarezo
@@ -12,4 +16,9 @@ public class SistemaVehicular {
     public static void main(String[] args){
         
     }
+    
+    public static void cargarUsuario (){
+        ArrayList<String> datos =
+    }
+    
 }
