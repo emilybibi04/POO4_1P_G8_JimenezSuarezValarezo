@@ -9,5 +9,5 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 public enum Perfil {
-    CLIENTE, OPERADOR
+    CLIENTE, OPERADOR, UNDEFINED
 }

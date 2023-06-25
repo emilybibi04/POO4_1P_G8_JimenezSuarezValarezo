@@ -93,5 +93,5 @@ public class Usuario {
     public void sePerfil(Perfil perfil){
         this.perfil = perfil;
     }
-    
+        
 }
