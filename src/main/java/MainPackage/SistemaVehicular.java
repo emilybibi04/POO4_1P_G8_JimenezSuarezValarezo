@@ -27,22 +27,34 @@ public class SistemaVehicular {
         System.out.println(" ");
         System.out.println("Usuario: ");
         String user = sc.nextLine();
-        System.out.println("Contraseña");
+        System.out.println("Contraseña:");
         String pass = sc.nextLine();
+        
+        System.out.println("");
+        cargarUsuario(user,pass);
     }
     
-    public static void cargarUsuario (){
+    public static void cargarUsuario (String user, String pass){
         ArrayList<String> datos = ManejoArchivo.LeeFichero("usuarios.txt");
+        
+        boolean usuarioValido = false;
+        
         for(String linea: datos){
             Perfil p = Perfil.UNDEFINED;
             String[] elemento = linea.trim().split(",");
-//            String cedulaA = elemento[0];
-//            String nombreA = elemento [1];
-//            int edadA = Integer.parseInt(elemento [2]);
-//            String correoA = elemento [3];
-//            String usuarioA = elemento [4];
-//            String contrasenaA = elemento [5];
+            String cedulaA = elemento[0];
+            String nombreA = elemento [1];
+            int edadA = Integer.parseInt(elemento [2]);
+            String correoA = elemento [3];
+            String usuarioA = elemento [4];
+            String contrasenaA = elemento [5];
             String perfilA = elemento [6];
+                        
+            //validacion para saber si el usuario y clave escritos por el usuario sean correctos
+            if (usuarioA.equals(user) && contrasenaA.equals(pass)) {
+                usuarioValido = true;
+                break;
+            }
             
             switch(perfilA){
                 case "O":
@@ -57,6 +69,11 @@ public class SistemaVehicular {
                 default:
                     System.out.println("Usuario no válido");
             }
+        }
+        if (usuarioValido) {
+            System.out.println("Su inicio de sesión ha sido exitoso");
+        } else {
+            System.out.println("Su usuario o contraseña son incorrectos");
         }
     }
  
