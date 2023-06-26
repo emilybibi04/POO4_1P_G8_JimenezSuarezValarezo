@@ -17,8 +17,15 @@ import MainPackage.Vehiculo;
 public class Cliente extends Usuario {
     //Atributos de instancia de la clase 'Cliente'
     private TipoCliente tipo; 
-    private int numTarjetaCredito;
+    private int numTarjetaCred;
     private int puntosLicencia; 
     private Vehiculo vehiculo;
     
+    public Cliente(TipoCliente tipo, int numTarjetaCred, int puntosLicencia, Vehiculo vehiculo){
+        this.tipo = tipo;
+        this.numTarjetaCred = numTarjetaCred;
+        this.puntosLicencia = puntosLicencia;
+        this.vehiculo = vehiculo;
+    
+    }
 }
