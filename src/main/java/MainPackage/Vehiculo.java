@@ -79,6 +79,11 @@ public class Vehiculo {
    }
    
    //sobreescritura método toString de 'Vehículo'.
+   @Override
+   public String toString(){
+       return "Placa: "+placa+" | "+"Marca: "+marca+" | "+"Modelo: "+modelo+" | "+
+               "Año: "+anio+" | "+"Chasis: "+chasis+" | "+"Color: "+color;
+   }
 }
 
 

@@ -32,6 +32,7 @@ public class Cliente extends Usuario {
     }
     
     //Sobreescritura del método toString()
+    @Override
     public String toString(){
         return "Tipo de cliente: "+ tipo +"/nPuntos de Licencia: "+ puntosLicencia+ "/nVehiculo:/n"+ vehiculo.toString();
     }
