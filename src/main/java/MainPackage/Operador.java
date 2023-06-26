@@ -9,5 +9,6 @@ package MainPackage;
  * @author gabsy
  */
 public class Operador extends Usuario {
+    //atributo de instancia de 'Operador'
      private double sueldo;
 }
