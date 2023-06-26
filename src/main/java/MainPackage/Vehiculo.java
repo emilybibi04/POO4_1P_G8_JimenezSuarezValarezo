@@ -62,22 +62,23 @@ public class Vehiculo {
        return anio;
    }
    
-   //
+   //chasis
    public void setChasis(String chasis){
        this.chasis = chasis;
    }
-   
    public String getChasis(){
        return chasis;
    }
    
+   //color
    public void setColor(String color){
        this.color = color;
-   }
-   
+   }   
    public String getColor(){
        return color;
    }
+   
+   //sobreescritura método toString de 'Vehículo'.
 }
 
 

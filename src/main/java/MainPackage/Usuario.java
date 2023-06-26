@@ -5,11 +5,13 @@
 package MainPackage;
 import EnumPackage.Perfil;
 
+
 /**
  *
  * @author emilyvalarezo
  */
 public class Usuario {
+    
     private String cedula;
     private String nombres;
     private String apellidos;
@@ -20,6 +22,7 @@ public class Usuario {
     private Perfil perfil;
     
     public Usuario (String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil){
+        
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
