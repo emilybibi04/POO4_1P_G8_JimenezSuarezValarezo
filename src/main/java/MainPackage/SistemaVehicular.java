@@ -13,9 +13,7 @@ import EnumPackage.Perfil;
  *
  * @author emilyvalarezo
  */
-public class SistemaVehicular {
-    
-    
+public abstract class SistemaVehicular {
     
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -76,6 +74,8 @@ public class SistemaVehicular {
             System.out.println("Su usuario o contraseña son incorrectos");
         }
     }
+    
+    public abstract void mostrarOpciones(Usuario usuario);
  
 }
     

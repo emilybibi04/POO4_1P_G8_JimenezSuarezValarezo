@@ -5,6 +5,7 @@
 package MainPackage;
 import EnumPackage.TipoCliente;
 import EnumPackage.Perfil;
+import java.util.Scanner;
 
 
 /**
@@ -31,8 +32,38 @@ public class Cliente extends Usuario {
     
     }
     
-    //Sobreescritura del método toString()
+    //Sobreescritura del método mostrarOpciones de la clase SistemaVehicular
     @Override
+    public void mostrarOpciones(Usuario u){
+      Scanner sc = new Scanner(System.in);
+      
+      //Opciones para el Usuario Cliente
+      System.out.println("--------------------------------------------------");
+      System.out.printf("%32s","OPCIONES CLIENTE");
+      System.out.println("\n--------------------------------------------------");
+      System.out.println("1. Consultar Multas");
+      System.out.println("2. Agendar Revisión técnica");
+      System.out.println("Ingrese el número de la opción que desea: ");  
+      int opcion = sc.nextInt();
+      
+      //validación de la opción elegida, esta debe de ser uno 1 o 2
+      while(opcion!=1 && opcion != 2){
+            System.out.println("Ingrese una opción correcta");
+            System.out.println("--------------------------------------------------");
+            System.out.printf("%32s","OPCIONES CLIENTE");
+            System.out.println("\n--------------------------------------------------");
+            System.out.println("1. Consultar Multas");
+            System.out.println("2. Agendar Revisión técnica");
+            System.out.println("Ingrese el número de la opción que desea: ");
+            opcion = sc.nextInt();
+        } 
+    }
+    
+    
+    
+    
+    @Override
+    //Sobreescritura del método toString()
     public String toString(){
         return "Tipo de cliente: "+ tipo +"/nPuntos de Licencia: "+ puntosLicencia+ "/nVehiculo:/n"+ vehiculo.toString();
     }

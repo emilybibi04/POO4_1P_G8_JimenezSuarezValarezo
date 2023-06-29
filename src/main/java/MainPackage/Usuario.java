@@ -10,7 +10,7 @@ import EnumPackage.Perfil;
  *
  * @author emilyvalarezo
  */
-public class Usuario {
+public abstract class Usuario extends SistemaVehicular{
     
     private String cedula;
     private String nombres;
