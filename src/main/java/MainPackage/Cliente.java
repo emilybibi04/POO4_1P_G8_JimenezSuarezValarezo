@@ -6,7 +6,10 @@ package MainPackage;
 import EnumPackage.TipoCliente;
 import EnumPackage.Perfil;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -60,11 +63,15 @@ public class Cliente extends Usuario {
     }
     
     
-    
-    
     @Override
     //Sobreescritura del método toString()
     public String toString(){
         return "Tipo de cliente: "+ tipo +"/nPuntos de Licencia: "+ puntosLicencia+ "/nVehiculo:/n"+ vehiculo.toString();
+    }
+    
+    //Sobreecritura del método consultarMultas() de la clase padre
+    @Override
+    public void consultarMultas(){
+        
     }
 }

@@ -96,5 +96,7 @@ public abstract class Usuario extends SistemaVehicular{
     public void sePerfil(Perfil perfil){
         this.perfil = perfil;
     }
+    
+    protected void consultarMultas(){}
         
 }
