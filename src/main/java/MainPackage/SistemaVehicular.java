@@ -28,6 +28,10 @@ public abstract class SistemaVehicular {
         System.out.println("Contraseña:");
         String pass = sc.nextLine();
         
+        
+        
+        
+        
         System.out.println("");
         cargarUsuario(user,pass);
     }
