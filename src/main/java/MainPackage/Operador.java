@@ -9,6 +9,11 @@ import static MainPackage.SistemaVehicular.usuariosRegistrados;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+//imports para el tiempo
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.InputMismatchException;
 
 
 /**
@@ -94,8 +99,47 @@ public class Operador extends Usuario {
 //            }    
     }
     
-    
-    
+    @Override
+    public void consultarMultas(){
+        //Establecer una fecha actual para el proyecto con Date
+        LocalDate fechaActual = LocalDate.now();
+        int mesActual = fechaActual.getMonthValue();        
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("MMMM", new Locale("es"));
+        String nombreMes = fechaActual.format(formateador);
+        String mesMayus = nombreMes.substring(0, 1).toUpperCase() +nombreMes.substring(1);
+        //cargar el ArrayList de los usuarios
+        ArrayList<Usuario> lista=Utilitaria.cargarUsuario();
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%32s","CONSULTAR MULTAS");
+        System.out.println("\n--------------------------------------------------\n");
+        System.out.println("Mes: "+mesMayus+"\n");
+        System.out.printf("%32s","Conductores multados\n");
+        System.out.println("CONDUCTOR | PLACA | INFRACCIÓN | VALOR INFRACCIÓN | FECHA INFRACCIÓN | FECHA NOTIFICACIÓN | PUNTOS");
+        //cargar el ArraList de las multas  
+        ArrayList<String> multas = ManejoArchivo.LeeFichero("multas.txt");
+        for(String linea: multas){ 
+            String[] elemento = linea.trim().split(",");
+            String cedula= elemento[0];
+            String nombre="";
+            for (Usuario u: lista){
+                if (u.getCedula().equals(cedula)){ //comparar la cedula en el archivo multas  con la de usuarios
+                    nombre=u.getNombres()+" "+u.getApellidos();
+                }
+            }
+            String placa= elemento [1];
+            String infraccion= elemento [2];
+            double valor= Double.parseDouble(elemento[3]);
+            String fecha_infra=elemento[4];
+            String fecha_noti= elemento [5];
+            int puntos=Integer.parseInt(elemento[6]);
+            String[] fecha= elemento[4].trim().split("-");
+            int mesMulta=Integer.parseInt(fecha[1]);
+            if (mesMulta==mesActual){
+                System.out.println(nombre+","+placa+","+infraccion+","+valor+","+fecha_infra+","+fecha_noti+","+puntos);
+            }
+        }
+    }
+        
     public void consultarUsuarios(ArrayList<Usuario> lista){
         System.out.println("--------------------------------------------------");
         System.out.printf("%32s","CONSULTAR USUARIOS");
