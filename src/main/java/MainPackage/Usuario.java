@@ -11,7 +11,7 @@ import EnumPackage.Perfil;
  * @author emilyvalarezo
  */
 
-public class Usuario{
+public abstract class Usuario{
     
     private String cedula;
     private String nombres;
@@ -102,8 +102,7 @@ public class Usuario{
     public String toString(){
         return cedula + nombres + apellidos + edad + correo + usuario + contrasena + perfil;
     }
+    public abstract void opcionesMenu();
     
-    public void opcionesMenu(){}
-    
-    public void consultarMultas(){}
+    public abstract void consultarMultas();
 }
