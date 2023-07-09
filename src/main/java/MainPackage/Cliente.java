@@ -31,7 +31,8 @@ public class Cliente extends Usuario {
     
     }
 
-    public void opcionesCliente(Usuario u){
+    @Override
+    public void opcionesMenu(){
       Scanner sc = new Scanner(System.in);
       
       //Opciones para el Usuario Cliente

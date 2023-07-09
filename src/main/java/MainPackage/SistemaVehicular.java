@@ -20,9 +20,7 @@ public class SistemaVehicular {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.println("+".repeat(32));
-        System.out.println(" ");
         System.out.println("     BIENVENIDO AL SISTEMA     ");
-        System.out.println(" ");
         System.out.println("+".repeat(32));
         System.out.println(" ");
         System.out.print("Usuario: ");
@@ -30,7 +28,14 @@ public class SistemaVehicular {
         System.out.print("Contraseña: ");
         String pass = sc.nextLine();
         cargarUsuario();
-        comprobarUsuario(user, pass, usuariosRegistrados);
+        boolean validar = comprobarUsuario(user, pass, usuariosRegistrados);
+        if (validar){
+            System.out.println("Su inicio de sesión ha sido exitoso");
+            comprobarTipo();
+        } else {
+            System.out.println("Su usuario o contraseña son incorrectos");
+        }
+
     }
     
     public static void cargarUsuario (){
@@ -65,13 +70,25 @@ public class SistemaVehicular {
             } 
     }
     
-    public static boolean comprobarUsuario(String user, String pass, ArrayList<Usuario> lista){
-        for (Usuario u : lista) {
-            if (u.getUsuario().equals(user) && u.getContrasena().equals(pass)) {
-                return true;
-            }
+    public static boolean comprobarUsuario(String user, String pass, ArrayList<Usuario> lista) {
+    for (Usuario u : lista) {
+        if (u.getUsuario().equals(user) && u.getContrasena().equals(pass)) {
+            return true; // Usuario encontrado, retorna true
         }
-        return false;
+    }
+    return false; // Usuario no encontrado, retorna false
+        }
+    
+    public static void comprobarTipo(){
+        for (Usuario u : usuariosRegistrados){
+            if(u instanceof Cliente){
+                Cliente cliente = (Cliente)u;
+                cliente.opcionesMenu();
+        } else if (u instanceof Operador){
+            Operador operador = (Operador)u;
+            operador.opcionesMenu();
+        }
+        }
     }
 
 }

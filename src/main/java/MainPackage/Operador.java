@@ -21,4 +21,9 @@ public class Operador extends Usuario {
          //invocación del constructor de la clase padre
          super(cedula, nombres, apellidos, edad, correo, usuario, contrasena, perfil);
      }
+     
+     @Override
+     public void opcionesMenu(){
+         System.out.println("pipi");
+     }
 }

@@ -102,6 +102,10 @@ public class Usuario{
         return cedula + nombres + apellidos + edad + correo + usuario + contrasena + perfil;
     }
     
+    public void opcionesMenu(){
+        
+    }
+    
     public void consultarMultas(){
     }
 }
