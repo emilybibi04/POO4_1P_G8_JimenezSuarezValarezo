@@ -13,7 +13,9 @@ import EnumPackage.Perfil;
  *
  * @author emilyvalarezo
  */
-public abstract class SistemaVehicular {
+public class SistemaVehicular {
+    
+    static ArrayList<Usuario> usuariosRegistrados = new ArrayList<>();
     
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -23,67 +25,54 @@ public abstract class SistemaVehicular {
         System.out.println(" ");
         System.out.println("+".repeat(32));
         System.out.println(" ");
-        System.out.println("Usuario: ");
+        System.out.print("Usuario: ");
         String user = sc.nextLine();
-        System.out.println("Contraseña:");
+        System.out.print("Contraseña: ");
         String pass = sc.nextLine();
-        
-        
-        
-        
-        
-        System.out.println("");
-        cargarUsuario(user,pass);
+        cargarUsuario();
+        comprobarUsuario(user, pass, usuariosRegistrados);
     }
     
-    public static void cargarUsuario (String user, String pass){
+    public static void cargarUsuario (){
         ArrayList<String> datos = ManejoArchivo.LeeFichero("usuarios.txt");
-        
-        boolean usuarioValido = false;
-        
         for(String linea: datos){
             Perfil p = Perfil.UNDEFINED;
             String[] elemento = linea.trim().split(",");
             String cedulaA = elemento[0];
-            String nombreA = elemento [1];
+            String[] nombresA = elemento [1].trim().split(" ");
+            String nombreA = nombresA[0];
+            String apellidoA = nombresA[1];
             int edadA = Integer.parseInt(elemento [2]);
             String correoA = elemento [3];
             String usuarioA = elemento [4];
             String contrasenaA = elemento [5];
             String perfilA = elemento [6];
-                        
-            //validacion para saber si el usuario y clave escritos por el usuario sean correctos
-            if (usuarioA.equals(user) && contrasenaA.equals(pass)) {
-                usuarioValido = true;
-                break;
-            }
             
             switch(perfilA){
                 case "O":
                     p = Perfil.OPERADOR;
                     break;
-                case "S":
-                    p = Perfil.CLIENTE;
-                    break;
                 case "E":
                     p = Perfil.CLIENTE;
                     break;
-                default:
-                    System.out.println("Usuario no válido");
+                case "S":
+                    p = Perfil.CLIENTE;
+                    break;
             }
-        }
-        if (usuarioValido) {
-            System.out.println("Su inicio de sesión ha sido exitoso");
-        } else {
-            System.out.println("Su usuario o contraseña son incorrectos");
-        }
+            
+            Usuario u = new Usuario(cedulaA, nombreA, apellidoA, edadA, correoA, usuarioA, contrasenaA, p);
+            usuariosRegistrados.add(u);
+            } 
     }
     
-    
-    
-    
-    
-    public abstract void mostrarOpciones(Usuario usuario);
- 
+    public static boolean comprobarUsuario(String user, String pass, ArrayList<Usuario> lista){
+        for (Usuario u : lista) {
+            if (u.getUsuario().equals(user) && u.getContrasena().equals(pass)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
     

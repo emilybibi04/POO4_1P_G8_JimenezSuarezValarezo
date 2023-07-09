@@ -10,7 +10,7 @@ import EnumPackage.Perfil;
  *
  * @author emilyvalarezo
  */
-public abstract class Usuario extends SistemaVehicular{
+public class Usuario{
     
     private String cedula;
     private String nombres;
@@ -97,6 +97,9 @@ public abstract class Usuario extends SistemaVehicular{
         this.perfil = perfil;
     }
     
-    protected void consultarMultas(){}
+    @Override
+    public String toString(){
+        return cedula + nombres + apellidos + edad + correo + usuario + contrasena + perfil;
+    }
         
 }

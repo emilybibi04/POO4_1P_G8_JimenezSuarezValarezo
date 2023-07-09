@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
  * @author gabsy
  */
 
-//Creación de clase 'Cliente que hereda de 'Usuario' para hacer uso de sus atributos y sobreescribir sus métodos. 
+//Creación de clase 'Cliente que hereda de 'Usuario'
 public class Cliente extends Usuario {
     //Atributos de instancia de la clase 'Cliente'   
     private TipoCliente tipo; 
@@ -27,17 +27,14 @@ public class Cliente extends Usuario {
     public Cliente(String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil, TipoCliente tipo, int numTarjetaCred, int puntosLicencia, Vehiculo vehiculo){
         //invocación del constructor de la clase padre
         super(cedula, nombres, apellidos, edad, correo, usuario, contrasena, perfil);
-        
         this.tipo = tipo;
         this.numTarjetaCred = numTarjetaCred;
         this.puntosLicencia = puntosLicencia;
         this.vehiculo = vehiculo;
     
     }
-    
-    //Sobreescritura del método mostrarOpciones de la clase SistemaVehicular
-    @Override
-    public void mostrarOpciones(Usuario u){
+
+    public void opcionesCliente(Usuario u){
       Scanner sc = new Scanner(System.in);
       
       //Opciones para el Usuario Cliente
