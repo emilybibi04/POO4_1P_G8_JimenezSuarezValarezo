@@ -6,10 +6,7 @@ package MainPackage;
 import EnumPackage.TipoCliente;
 import EnumPackage.Perfil;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,6 +66,41 @@ public class Cliente extends Usuario {
     //Sobreecritura del método consultarMultas() de la clase padre
     @Override
     public void consultarMultas(){
+        //Menú del método
+        Scanner sc = new Scanner(System.in);
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%32s","CONSULTA DE MULTAS");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("Ingrese su  matrícula o cédula: ");
+        String matri_ci = sc.nextLine();
+        sc.nextLine();
+        
+        ArrayList<String> lineas = ManejoArchivo.LeeFichero("multas.txt");
+        ArrayList<String> multasC = new ArrayList<>();   
+        
+        //Verificar las multas que pertenecen al cliente, a través de su cédula
+        for(String l : lineas){
+            String[] l2 = l.split(",");
+            if(matri_ci.equals(l2[0]) || matri_ci.equals(l2[1])){
+                multasC.add(l);
+            } 
+        }
+
+        //Formato de las multas
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%32s","DETALLE DE MULTAS");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("CÉDULA | MATRÍCULA | INFRACCIÓN | VALOR A PAGAR | FECHA DE INFRACCIÓN | FECHA DE NOTIFICACIÓN | PUNTOS");
+        
+        int saldo = 0;
+        for(String multas : multasC){
+            String[] datos = multas.split(",");
+            saldo =+ Integer.valueOf(datos[3]);
+            System.out.printf("%6s | %6s | %6s | %6s | %6s | %6s | %6s",datos[0], datos[1], datos[2],datos[3],datos[4],datos[5],datos[6]);
+        }
+        
+        System.out.println("TOTAL A PAGAR: " + saldo);
+        System.out.println("PARA PAGAR PUEDE ACERCARSE A LA AGENCIA MÁS CERCANA.");
         
     }
 }

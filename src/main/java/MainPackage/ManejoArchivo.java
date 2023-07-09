@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class ManejoArchivo {
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
+        
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;
         FileReader fr = null;

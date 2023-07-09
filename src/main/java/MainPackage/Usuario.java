@@ -101,5 +101,7 @@ public class Usuario{
     public String toString(){
         return cedula + nombres + apellidos + edad + correo + usuario + contrasena + perfil;
     }
-        
+    
+    public void consultarMultas(){
+    }
 }
