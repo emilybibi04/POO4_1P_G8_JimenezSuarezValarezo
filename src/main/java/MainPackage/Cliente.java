@@ -37,20 +37,21 @@ public class Cliente extends Usuario {
       Scanner sc = new Scanner(System.in);
       
       //Opciones para el Usuario Cliente
-      System.out.println("--------------------------------------------------");
-      System.out.printf("%32s","OPCIONES CLIENTE");
-      System.out.println("\n--------------------------------------------------");
+      System.out.println("-".repeat(50));
+      System.out.println("                 OPCIONES CLIENTE                 ");
+      System.out.println("-".repeat(50));
+      System.out.println(" ");
       System.out.println("1. Consultar Multas");
       System.out.println("2. Agendar Revisión técnica");
-      System.out.println("Ingrese el número de la opción que desea: ");  
+      System.out.print("Ingrese el número de la opción que desea: ");  
       int opcion = sc.nextInt();
       
       //validación de la opción elegida, esta debe de ser uno 1 o 2
       while(opcion!=1 && opcion != 2){
             System.out.println("Ingrese una opción correcta");
-            System.out.println("--------------------------------------------------");
-            System.out.printf("%32s","OPCIONES CLIENTE");
-            System.out.println("\n--------------------------------------------------");
+            System.out.println("-".repeat(50));
+            System.out.println("                 OPCIONES CLIENTE                 ");
+            System.out.println("-".repeat(50));
             System.out.println("1. Consultar Multas");
             System.out.println("2. Agendar Revisión técnica");
             System.out.println("Ingrese el número de la opción que desea: ");
@@ -69,9 +70,10 @@ public class Cliente extends Usuario {
     public void consultarMultas(){
         //Menú del método
         Scanner sc = new Scanner(System.in);
-        System.out.println("--------------------------------------------------");
-        System.out.printf("%32s","CONSULTA DE MULTAS");
-        System.out.println("\n--------------------------------------------------");
+        System.out.println("-".repeat(50));
+        System.out.printf("                CONSULTA DE MULTAS                ");
+        System.out.println("-".repeat(50));
+        System.out.println(" ");
         System.out.println("Ingrese su  matrícula o cédula: ");
         String matri_ci = sc.nextLine();
         sc.nextLine();
@@ -88,9 +90,10 @@ public class Cliente extends Usuario {
         }
 
         //Formato de las multas
-        System.out.println("--------------------------------------------------");
-        System.out.printf("%32s","DETALLE DE MULTAS");
-        System.out.println("\n--------------------------------------------------");
+        System.out.println("-".repeat(50));
+        System.out.printf("                DETALLE DE MULTAS                 ");
+        System.out.println("-".repeat(50));
+        System.out.println(" ");
         System.out.println("CÉDULA | MATRÍCULA | INFRACCIÓN | VALOR A PAGAR | FECHA DE INFRACCIÓN | FECHA DE NOTIFICACIÓN | PUNTOS");
         
         int saldo = 0;
