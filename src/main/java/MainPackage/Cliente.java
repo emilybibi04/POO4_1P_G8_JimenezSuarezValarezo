@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class Cliente extends Usuario {
     //Atributos de instancia de la clase 'Cliente'   
     private TipoCliente tipo; 
-    private int numTarjetaCred;
+    private String numTarjetaCred;
     private int puntosLicencia; 
     private Vehiculo vehiculo;
     
-    public Cliente(String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil, TipoCliente tipo, int numTarjetaCred, int puntosLicencia, Vehiculo vehiculo){
+    public Cliente(String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil, TipoCliente tipo, String numTarjetaCred, int puntosLicencia, Vehiculo vehiculo){
         //invocación del constructor de la clase padre
         super(cedula, nombres, apellidos, edad, correo, usuario, contrasena, perfil);
         this.tipo = tipo;

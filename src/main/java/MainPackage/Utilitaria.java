@@ -2,12 +2,117 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package MainPackage;
+import EnumPackage.Perfil;
+import EnumPackage.TipoCliente;
+import java.util.ArrayList;
 
 /**
  *
  * @author emilyvalarezo
  */
+
 public class Utilitaria {
-    
+    public static ArrayList<Usuario> cargarUsuario(){
+        ArrayList<Usuario> usuariosArray = new ArrayList<>();
+        ArrayList<String> datos = ManejoArchivo.LeeFichero("usuarios.txt");
+        for(String linea : datos){
+            Perfil p;
+            TipoCliente tc;
+            ArrayList<String> datosUsuario = new ArrayList<>();
+            ArrayList<String> datosVehiculo = new ArrayList<>();
+            String numTarjeta = "";
+            int puntosLic = 0;
+            Vehiculo auto = new Vehiculo();
+            String[] elemento = linea.trim().split(",");
+            String cedulaA = elemento[0];
+            String[] nombresA = elemento[1].trim().split(" ");
+            String nombreA = nombresA[0];
+            String apellidoA = nombresA[1];
+            int edadA = Integer.parseInt(elemento[2]);
+            String correoA = elemento[3];
+            String usuarioA = elemento[4];
+            String contrasenaA = elemento[5];
+            String perfilA = elemento[6];
+            
+            switch(perfilA){
+                case "O":
+                    p = Perfil.OPERADOR;
+                    datosUsuario = ManejoArchivo.LeeFichero("operadores.txt");
+                    double sueldo = 0;
+                    for(String lineaO : datosUsuario){
+                        String[] elementoO = lineaO.trim().split(",");
+                        String cedulaO = elementoO[0];
+                        if(cedulaO.equals(cedulaA))
+                            sueldo = Double.parseDouble(elementoO[1]);
+                    }
+                    Usuario operador = new Operador(cedulaA, nombreA, apellidoA, edadA, correoA, usuarioA, contrasenaA, p, sueldo);
+                    usuariosArray.add(operador);
+                    break;
+                    
+                case "E":
+                    p = Perfil.CLIENTE;
+                    tc = TipoCliente.ESTRELLA;
+                    datosUsuario = ManejoArchivo.LeeFichero("clientes.txt");
+                    datosVehiculo = ManejoArchivo.LeeFichero("vehiculos.txt");
+                    for(String lineaC : datosUsuario){
+                        String[] elementoC = lineaC.trim().split(",");
+                        String cedulaC = elementoC[0];
+                        if(cedulaC.equals(cedulaA)){
+                            numTarjeta = elementoC[1];
+                            puntosLic = Integer.parseInt(elementoC[2]);
+                        }
+                    }
+                    for(String lineaV : datosVehiculo){
+                        String[] elementoV = lineaV.trim().split(",");
+                        String cedulaV = elementoV[0];
+                        String placa = elementoV[1];
+                        String marca = elementoV[2];
+                        String modelo = elementoV[3];
+                        int anio = Integer.parseInt(elementoV[4]);
+                        String chasis = elementoV[5];
+                        String color = elementoV[6];
+                        if(cedulaV.equals(cedulaA)){
+                            auto = new Vehiculo(cedulaV, placa, marca, modelo, anio, chasis, color);
+                        }
+                    }
+                    Usuario clienteEstrella = new Cliente(cedulaA, nombreA, apellidoA, edadA, correoA, usuarioA, contrasenaA, p, tc, numTarjeta, puntosLic, auto);
+                    usuariosArray.add(clienteEstrella);
+                    break;
+                    
+                case "S":
+                    p = Perfil.CLIENTE;
+                    tc = TipoCliente.ESTANDAR;
+                    datosUsuario = ManejoArchivo.LeeFichero("clientes.txt");
+                    datosVehiculo = ManejoArchivo.LeeFichero("vehiculos.txt");
+                    for(String lineaC : datosUsuario){
+                        String[] elementoC = lineaC.trim().split(",");
+                        String cedulaC = elementoC[0];
+                        if(cedulaC.equals(cedulaA)){
+                            numTarjeta = elementoC[1];
+                            puntosLic = Integer.parseInt(elementoC[2]);
+                        }
+                    }
+                    for(String lineaV:datosVehiculo){
+                        String[] elementoV = lineaV.trim().split(",");
+                        String cedulaV = elementoV[0];
+                        String placa = elementoV[1];
+                        String marca = elementoV[2];
+                        String modelo = elementoV[3];
+                        int anio = Integer.parseInt(elementoV[4]);
+                        String chasis = elementoV[5];
+                        String color = elementoV[6];
+                        if(cedulaV.equals(cedulaA)){
+                            auto = new Vehiculo(cedulaV,placa,marca,modelo,anio,chasis,color);
+                        }
+                    }
+                    Usuario clienteEstandar = new Cliente(cedulaA, nombreA, apellidoA, edadA, correoA, usuarioA, contrasenaA, p, tc, numTarjeta, puntosLic, auto);
+                    usuariosArray.add(clienteEstandar);
+                    break;
+            }
+        } 
+        return usuariosArray;
+    }
+
 }

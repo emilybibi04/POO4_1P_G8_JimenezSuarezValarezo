@@ -9,6 +9,7 @@ package MainPackage;
  * @author gabsy
  */
 public class Vehiculo {
+    private String cedula;
     private String placa; 
     private String marca;
     private String modelo;
@@ -16,7 +17,10 @@ public class Vehiculo {
     private String chasis;
     private String color; 
     
-   public Vehiculo(String placa, String marca, String modelo, int anio, String chasis, String color){
+    public Vehiculo(){}
+    
+    public Vehiculo(String cedula, String placa, String marca, String modelo, int anio, String chasis, String color){
+       this.cedula = cedula;
        this.placa = placa;
        this.marca = marca;
        this.modelo = modelo;
@@ -27,65 +31,65 @@ public class Vehiculo {
    }
    
    //Métodos gettes y setters para acceder a los métodos privados
-   
-   //placa
-   public void setPlaca(String placa){
-       this.placa = placa;
-   }
-   public String setPlaca(){
-       return placa;
-   }
-   
-   //Marca
-   public void setMarca(String marca){
-       this.marca = marca;
-   }  
-   public String getMarca(){
-       return marca;
-   }
-   
-   //modelo
-   public void setModelo(String modelo){
-       this.modelo = modelo;
-   }
-   
-   public String getModelo(){
-       return modelo;
-   }
-   
-   //anio
-   public void setAnio(int anio){
-       this.anio = anio;
-   }
-   
-   public int getAnio(){
-       return anio;
-   }
-   
-   //chasis
-   public void setChasis(String chasis){
-       this.chasis = chasis;
-   }
-   public String getChasis(){
-       return chasis;
-   }
-   
-   //color
-   public void setColor(String color){
-       this.color = color;
-   }   
-   public String getColor(){
-       return color;
-   }
-   
-   //sobreescritura método toString de 'Vehículo'.
-   @Override
-   public String toString(){
-       return "Placa: "+placa+" | "+"Marca: "+marca+" | "+"Modelo: "+modelo+" | "+
-               "Año: "+anio+" | "+"Chasis: "+chasis+" | "+"Color: "+color;
-   }
-}
+    
+    public String getCedula(){
+        return cedula;
+    }
+    
+    //placa
+    public void setPlaca(String placa){
+        this.placa = placa;
+    }
+    public String setPlaca(){
+        return placa;
+    }
 
+    //Marca
+    public void setMarca(String marca){
+        this.marca = marca;
+    }  
+    public String getMarca(){
+        return marca;
+    }
 
+    //modelo
+    public void setModelo(String modelo){
+        this.modelo = modelo;
+    }
 
+    public String getModelo(){
+        return modelo;
+    }
 
+    //anio
+    public void setAnio(int anio){
+        this.anio = anio;
+    }
+
+    public int getAnio(){
+        return anio;
+    }
+
+    //chasis
+    public void setChasis(String chasis){
+        this.chasis = chasis;
+    }
+    public String getChasis(){
+        return chasis;
+    }
+
+    //color
+    public void setColor(String color){
+        this.color = color;
+    }   
+    public String getColor(){
+        return color;
+    }
+
+    //sobreescritura método toString de 'Vehículo'.
+    @Override
+    public String toString(){
+        return "Placa: "+placa+" | "+"Marca: "+marca+" | "+"Modelo: "+modelo+" | "+
+                "Año: "+anio+" | "+"Chasis: "+chasis+" | "+"Color: "+color;
+    }
+ }
