@@ -6,8 +6,10 @@
 package MainPackage;
 import EnumPackage.TipoCliente;
 import EnumPackage.Perfil;
+import static MainPackage.SistemaVehicular.usuariosRegistrados;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -38,29 +40,45 @@ public class Cliente extends Usuario {
     @Override
     public void opcionesMenu(){
       Scanner sc = new Scanner(System.in);
+      int opcion;
       
       //Opciones para el Usuario Cliente
-      System.out.println("-".repeat(50));
-      System.out.println("                 OPCIONES CLIENTE                 ");
-      System.out.println("-".repeat(50));
-      System.out.println(" ");
-      System.out.println("1. Consultar Multas");
-      System.out.println("2. Agendar Revisión técnica");
-      System.out.print("Ingrese el número de la opción que desea: ");  
-      int opcion = sc.nextInt();
-      
-      //validación de la opción elegida, esta debe de ser uno 1 o 2
-      while(opcion!=1 && opcion != 2){
-            System.out.println("Ingrese una opción correcta");
-            System.out.println("-".repeat(50));
-            System.out.println("                 OPCIONES CLIENTE                 ");
-            System.out.println("-".repeat(50));
-            System.out.println("1. Consultar Multas");
-            System.out.println("2. Agendar Revisión técnica");
-            System.out.println("Ingrese el número de la opción que desea: ");
+    do{  
+        System.out.println("-".repeat(50));
+        System.out.println("                 OPCIONES CLIENTE                 ");
+        System.out.println("-".repeat(50));
+        System.out.println(" ");
+        System.out.println("1. Consultar Multas");
+        System.out.println("2. Agendar Revisión técnica");
+        System.out.println("3. Salir");
+        System.out.print("Ingrese el número de la opción que desea: ");  
+        try{
             opcion = sc.nextInt();
-        } 
-    }
+            sc.nextLine();
+            if (opcion < 1 || opcion > 3) { //validar que solo ingrese numeros del 1-3
+                System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
+            } else {
+                switch (opcion) {
+                    case 1:
+                        consultarMultas();
+                        break;
+                    case 2:
+                        //tu otro metodo de agendar revision tecnica
+                        break;
+                    case 3:
+                        System.out.println("Saliendo del programa...");
+                        break;
+                }
+            }
+        } catch (InputMismatchException e) { //validar que no ingrese caracteres diferentes de numeros
+            System.out.println("Opción inválida. Por favor, ingrese un número válido.");
+            sc.nextLine(); // Limpiar el búfer
+            opcion = 0; // Establecer la opción en 0 para repetir el ciclo
+        }
+    } while (opcion != 3);
+}
+      
+
 
     @Override
     //Sobreescritura del método toString()
