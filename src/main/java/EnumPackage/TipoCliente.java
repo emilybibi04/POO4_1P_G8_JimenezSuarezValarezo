@@ -9,5 +9,5 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 public enum TipoCliente {
-    ESTANDAR, ESTRELLA
+    ESTANDAR, ESTRELLA, UNDEFINED
 }

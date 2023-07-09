@@ -17,6 +17,12 @@ public class SistemaVehicular {
     
     static ArrayList<Usuario> usuariosRegistrados = new ArrayList<>();
     
+    
+    static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Operador> operadores = new ArrayList<>();
+    
+    
+    
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.println("+".repeat(32));
@@ -35,7 +41,7 @@ public class SistemaVehicular {
         } else {
             System.out.println("Su usuario o contraseña son incorrectos");
         }
-
+        
     }
     
     public static void cargarUsuario (){
@@ -79,15 +85,46 @@ public class SistemaVehicular {
     return false; // Usuario no encontrado, retorna false
         }
     
-    public static void comprobarTipo(){
-        for (Usuario u : usuariosRegistrados){
-            if(u instanceof Cliente){
-                Cliente cliente = (Cliente)u;
-                cliente.opcionesMenu();
-        } else if (u instanceof Operador){
-            Operador operador = (Operador)u;
-            operador.opcionesMenu();
+//    public static void comprobarTipo(){
+//        for (Usuario u : usuariosRegistrados){
+//            if(u.getPerfil().equals(Perfil.CLIENTE)){
+//                //Cliente cliente = new Cliente();
+//                cliente.opcionesMenu();
+//        } else if (u.getPerfil().equals(Perfil.OPERADOR)){
+//            //Operador operador = (Operador)u;
+//            //operador.opcionesMenu();
+//        }
+//        }
+//    }
+    
+    public static void cargarClientes() {
+        ArrayList<String> datos = ManejoArchivo.LeeFichero("clientes.txt");
+        for (String linea : datos) {
+            String[] elemento = linea.trim().split(",");
+            String cedula = elemento[0];
+            String tipoClienteStr = elemento[1];
+            int numTarjetaCred = Integer.parseInt(elemento[2]);
+            
+            TipoCliente tipoCliente = TipoCliente.valueOf(tipoClienteStr);
+            
+            for (Usuario u : usuariosRegistrados) {
+                if (u.getCedula().equals(cedula) && u.getPerfil() == Perfil.CLIENTE) {
+                    Cliente cliente = (Cliente) u; // Realizar casting a Cliente
+                    cliente.setTipo(tipoCliente);
+                    cliente.setNumTarjetaCred(numTarjetaCred);
+                    clientes.add(cliente);
+                    break;
+                }
+            }
         }
+    }
+    
+    public static void cargarOperadores() {
+        for (Usuario u : usuariosRegistrados) {
+            if (u.getPerfil() == Perfil.OPERADOR) {
+                Operador operador = (Operador) u; // Realizar casting a Operador
+                operadores.add(operador);
+            }
         }
     }
 
