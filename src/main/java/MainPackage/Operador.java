@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package MainPackage;
 import EnumPackage.Perfil;
 
@@ -13,6 +14,7 @@ import EnumPackage.Perfil;
 /* La clase 'Operador', creará objetos de tipo Operador para representar una de las clasificaciones de los Usuarios 
    posibles del Sistema Vehicular. Un Usuario es del tipo Operador si...
 */
+
 public class Operador extends Usuario {
     //atributo de instancia de 'Operador'
      private double sueldo;

@@ -2,14 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package MainPackage;
 import EnumPackage.Perfil;
-
 
 /**
  *
  * @author emilyvalarezo
  */
+
 public class Usuario{
     
     private String cedula;
@@ -102,10 +103,7 @@ public class Usuario{
         return cedula + nombres + apellidos + edad + correo + usuario + contrasena + perfil;
     }
     
-    public void opcionesMenu(){
-        
-    }
+    public void opcionesMenu(){}
     
-    public void consultarMultas(){
-    }
+    public void consultarMultas(){}
 }

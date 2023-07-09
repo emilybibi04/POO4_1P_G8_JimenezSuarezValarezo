@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package MainPackage;
 
 //se importa los paquetes necesarios
@@ -13,6 +14,7 @@ import EnumPackage.RazonPago;
  *
  * @author gabsy
  */
+
 public class Pago {
     
     //variables de instancia
@@ -82,15 +84,10 @@ public class Pago {
     public void setRazonPago(RazonPago razonPago) {
         this.razonPago = razonPago;
     }
-    
-    
+
     //métodos
     
-    public void pagoMulta(){
-        
-    }
+    public void pagoMulta(){}
     
-    public void pagoRevision(){
-        
-    }
+    public void pagoRevision(){}
 }

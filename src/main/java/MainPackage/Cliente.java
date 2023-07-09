@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package MainPackage;
 import EnumPackage.TipoCliente;
 import EnumPackage.Perfil;
@@ -56,8 +57,7 @@ public class Cliente extends Usuario {
             opcion = sc.nextInt();
         } 
     }
-    
-    
+
     @Override
     //Sobreescritura del método toString()
     public String toString(){

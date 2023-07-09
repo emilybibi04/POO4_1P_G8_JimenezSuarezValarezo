@@ -114,5 +114,24 @@ public class Utilitaria {
         } 
         return usuariosArray;
     }
-
+    
+    public static boolean comprobarUsuario(String user, String pass, ArrayList<Usuario> lista) {
+        for (Usuario u : lista) {
+            if (u.getUsuario().equals(user) && u.getContrasena().equals(pass)) {
+                return true; // Usuario encontrado, retorna true
+            }
+        }
+        return false; // Usuario no encontrado, retorna false
+    }
+    
+    public static void comprobarTipo(Usuario u){
+        if(u instanceof Cliente){
+            Cliente cliente = (Cliente) u;
+            cliente.opcionesMenu();
+        } 
+        else if (u instanceof Operador){
+            Operador operador = (Operador)u;
+            operador.opcionesMenu();
+        }
+    }
 }
