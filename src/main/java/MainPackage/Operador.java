@@ -6,6 +6,7 @@
 package MainPackage;
 import EnumPackage.Perfil;
 import static MainPackage.SistemaVehicular.usuariosRegistrados;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -78,6 +79,38 @@ public class Operador extends Usuario {
         }
     } while (opcion != 4);
 }
+    public void registrarPagos(){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Usuario> lista=Utilitaria.cargarUsuario();
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%32s","REGISTRAR PAGO");
+        System.out.println("\n--------------------------------------------------");
+        System.out.print("\n Ingrese su numero de cédula: ");
+        String cedula=sc.nextLine();
+//        for (Usuario u: lista){
+//                if (u.getCedula().equals(cedula)){
+//                    
+//                }
+//            }    
+    }
+    
+    
+    
+    public void consultarUsuarios(ArrayList<Usuario> lista){
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%32s","CONSULTAR USUARIOS");
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("");
+        for (Usuario u : lista) {
+            if (u instanceof Operador){
+                Operador operador = (Operador) u;
+                System.out.println(operador.getNombres()+" "+operador.getApellidos()+" | "+operador.getPerfil()+ " | "+operador.getSueldo());
+            } else if(u instanceof Cliente){
+                Cliente cliente = (Cliente) u;
+                System.out.println(cliente.getNombres()+" "+cliente.getApellidos()+ " | " +cliente.getPerfil() +" " +cliente.getTipoCliente()+" | "+cliente.getCedula());
+            }
+        }
+    }
      
      
 }

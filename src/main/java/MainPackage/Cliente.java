@@ -31,6 +31,9 @@ public class Cliente extends Usuario {
         this.vehiculo = vehiculo;
     
     }
+    public TipoCliente getTipoCliente(){
+        return tipo;
+    }
 
     @Override
     public void opcionesMenu(){
