@@ -89,12 +89,12 @@ public class Revision {
         if(c.getTipo() == TipoCliente.ESTRELLA)
             valorPagar = 120;
         else if(c.getTipo() == TipoCliente.ESTANDAR){
-            ArrayList<String> listaMultas=ManejoArchivo.LeeFichero("multas.txt");
+            ArrayList<String> listaClientes=ManejoArchivo.LeeFichero("clientes.txt");
             int puntosPerdidos=0;
-            for(String linea:listaMultas){
+            for(String linea:listaClientes){
                 String[] datos=linea.trim().split(",");
                 if(datos[0].equals(c.getCedula()))
-                    puntosPerdidos=Integer.parseInt(datos[6]);
+                    puntosPerdidos=30-Integer.parseInt(datos[2]);
             }
             valorPagar=base+(puntosPerdidos*10);
         }

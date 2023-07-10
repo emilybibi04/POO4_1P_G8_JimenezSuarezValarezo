@@ -149,4 +149,15 @@ public class Utilitaria {
         
         return true;
     }
+    
+    public static boolean verificarCliente(String cedula){
+        ArrayList<Usuario> lista=cargarUsuario();
+        for (Usuario u: lista){
+            if (cedula.equals(u.getCedula()) && u.getPerfil().equals(Perfil.CLIENTE)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
