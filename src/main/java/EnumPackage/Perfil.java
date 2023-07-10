@@ -10,6 +10,21 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 
+/**
+ * Enumeración que representa los diferentes perfiles de usuarios.
+ */
+
 public enum Perfil {
-    CLIENTE, OPERADOR, UNDEFINED
+    /**
+     * Perfil del Cliente
+     */
+    CLIENTE,
+    /**
+     * Perfil del Operador
+     */
+    OPERADOR,
+    /**
+     * Perfil no definido
+     */
+    UNDEFINED
 }

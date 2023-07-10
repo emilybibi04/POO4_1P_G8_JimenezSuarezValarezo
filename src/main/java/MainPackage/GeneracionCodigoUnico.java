@@ -18,10 +18,20 @@ public class GeneracionCodigoUnico {
     private Set<Integer> generatedCodes;
     private SecureRandom secureRandom;
     
+    /**
+     * Constructor de la clase GeneracionCodigoUnico.
+     */
+    
     public GeneracionCodigoUnico() {
         generatedCodes = new HashSet<>();
         secureRandom = new SecureRandom();
     }
+    
+    /**
+     * Método que genera un código único por medio del uso de Random.
+     * El código generado se asegura de no estar repetido en los códigos generados previamente.
+     * @return Código único generado.
+     */
     
     public int generarCodigoUnico() {
         int code;

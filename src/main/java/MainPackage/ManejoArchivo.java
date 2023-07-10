@@ -17,6 +17,13 @@ import java.util.ArrayList;
  */
 
 public class ManejoArchivo {
+    
+    /**
+     * Método que lee un archivo y devuelve las líneas del mismo en forma de ArrayList de cadenas.
+     * @param nombrearchivo Nombre del archivo a leer.
+     * @return ArrayList de cadenas con las líneas del archivo.
+     */
+    
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
         
         ArrayList<String> lineas = new ArrayList<>();

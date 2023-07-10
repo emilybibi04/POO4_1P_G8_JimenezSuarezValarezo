@@ -10,6 +10,17 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 
+/**
+ * Enumeración que representa las diferentes razones de pago.
+ */
+
 public enum RazonPago {
-    MULTA, REVISION
+    /**
+     * Pago por multa
+     */
+    MULTA,
+    /**
+     * Pago por revisión
+     */
+    REVISION
 }

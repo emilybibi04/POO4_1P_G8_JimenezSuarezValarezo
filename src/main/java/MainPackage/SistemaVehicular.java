@@ -15,9 +15,21 @@ public class SistemaVehicular {
     
     static ArrayList<Usuario> usuariosRegistrados = new ArrayList<>();
 
+    /**
+     * Método principal del sistema vehicular.
+     * Invoca el método para ejecutar la interfaz.
+     * @param args Argumentos de línea de comandos (no se utilizan en este caso).
+     */
+    
     public static void main(String[] args){
         ejecutarInterfaz();
     }
+    
+    /**
+     * Ejecuta la interfaz del sistema vehicular.
+     * Solicita el ingreso de usuario y contraseña, verifica su validez
+     * y realiza las acciones correspondientes según el tipo de usuario.
+     */
     
     public static void ejecutarInterfaz(){
         Scanner sc = new Scanner(System.in);

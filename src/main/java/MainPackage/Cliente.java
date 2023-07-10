@@ -32,6 +32,22 @@ public class Cliente extends Usuario {
     Scanner sc = new Scanner(System.in);
     Random rd = new Random();
     
+    /**
+     * Constructor de la clase Cliente.
+     * @param cedula          La cédula del cliente.
+     * @param nombres         Los nombres del cliente.
+     * @param apellidos       Los apellidos del cliente.
+     * @param edad            La edad del cliente.
+     * @param correo          El correo del cliente.
+     * @param usuario         El nombre de usuario del cliente.
+     * @param contrasena      La contraseña del cliente.
+     * @param perfil          El perfil del cliente.
+     * @param tipo            El tipo de cliente.
+     * @param numTarjetaCred  El número de tarjeta de crédito del cliente.
+     * @param puntosLicencia  Los puntos de licencia del cliente.
+     * @param vehiculo        El vehículo asociado al cliente.
+     */
+    
     public Cliente(String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil, TipoCliente tipo, String numTarjetaCred, int puntosLicencia, Vehiculo vehiculo){
         //invocación del constructor de la clase padre
         super(cedula, nombres, apellidos, edad, correo, usuario, contrasena, perfil);
@@ -40,12 +56,22 @@ public class Cliente extends Usuario {
         this.puntosLicencia = puntosLicencia;
         this.vehiculo = vehiculo;
         this.revision=new Revision();
-    
     }
+    
+    /**
+     * Método getter que obtiene el tipo de cliente.
+     * @return El tipo de cliente.
+     */
+    
     public TipoCliente getTipoCliente(){
         return tipo;
     }
 
+    /**
+     * Método sobreescrito que permite observar el Menú de Clientes.
+     * {@inheritDoc}
+     */
+    
     @Override
     public void opcionesMenu(){
       Scanner sc = new Scanner(System.in);
@@ -86,23 +112,40 @@ public class Cliente extends Usuario {
         } while (opcion != 3);
     }
 
+    /**
+     * Método getter que obtiene el tipo de usuario.
+     * @return El tipo de usuario.
+     */
+    
     public TipoCliente getTipo() {
         return tipo;
     }
 
+    /**
+     * Método getter que obtiene los puntos de licencia del cliente.
+     * @return Los puntos de licencia del cliente.
+     */
+    
     public int getPuntosLicencia() {
         return puntosLicencia;
     }
       
     
+    /**
+     * Sobreescritura del método toString() para poder representar el objeto en forma de cadena de texto.
+     * {@inheritDoc}
+     */
 
     @Override
-    //Sobreescritura del método toString()
     public String toString(){
         return "Tipo de cliente: "+ tipo +"/nPuntos de Licencia: "+ puntosLicencia+ "/nVehiculo:/n"+ vehiculo.toString();
     }
     
-    //Sobreecritura del método consultarMultas() de la clase padre
+    /**
+     * Sobreecritura del método consultarMultas() de la clase padre
+     * {@inheritDoc}
+     */
+
     @Override
     public void consultarMultas(){
         //Menú del método
@@ -143,7 +186,11 @@ public class Cliente extends Usuario {
         
     }
     
-    //Método AgendarRevision(). El método retornará un arreglo con los datos del horario que el cliente escogió
+    /**
+     * Método que permite agendar una revisión técnica.
+     * El método retornará un arreglo con los datos del horario que el cliente escogió
+     */
+    
     public void agendarRevision(){
         
         System.out.println("--------------------------------------------------");
@@ -281,8 +328,13 @@ public class Cliente extends Usuario {
         }
     }
     
+    /**
+     * Método setter de la revisión.
+     * @param r La revisión a establecer.
+     */
+    
     public void setRevision(Revision r){
-        this.revision=r;
+        this.revision = r;
     }
     
     

@@ -10,6 +10,21 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 
+/**
+ * Enumeración que representa los diferentes tipos de clientes.
+ */
+
 public enum TipoCliente {
-    ESTANDAR, ESTRELLA, UNDEFINED
+    /**
+     * Cliente estándar
+     */
+    ESTANDAR,
+    /**
+     * Cliente Estrella
+     */
+    ESTRELLA,
+    /**
+     * Cliente no definido
+     */
+    UNDEFINED
 }

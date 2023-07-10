@@ -20,9 +20,22 @@ public class Revision {
     private String matricula;
     private String fecha;
 
+    /**
+     * Constructor por defecto de la clase Revision.
+     */
+    
     public Revision(){
     }
 
+    
+    /**
+     * Constructor de la clase Revision.
+     * @param codigoHash Código hash de la revisión.
+     * @param cedula Cédula del cliente asociado a la revisión.
+     * @param matricula Matrícula del vehículo asociado a la revisión.
+     * @param fecha Fecha de la revisión.
+     */
+    
     public Revision(String codigoHash,String cedula,String matricula,String fecha){
         this.codigoHash=codigoHash;
         this.cedula=cedula;
@@ -30,9 +43,19 @@ public class Revision {
         this.fecha=fecha;
     }
 
+    /**
+     * Método getter que obtiene la fecha de la revisión.
+     * @return Fecha de la revisión.
+     */
+    
     public String getFecha(){
         return fecha;
     }
+    
+    /**
+     * Método que registra la revisión en un archivo.
+     * @param revision Datos de la revisión a registrar.
+     */
     
     public void registrarRevision(String revision){
         try{
@@ -52,6 +75,12 @@ public class Revision {
             }
     }
 
+    /**
+     * Método que calcula el valor a pagar por la revisión según el tipo de cliente.
+     * @param c Cliente asociado a la revisión.
+     * @return Valor a pagar por la revisión.
+     */
+    
     public double valorRevision(Cliente c){
         double base = 150;
         double valorPagar = 0;
@@ -72,6 +101,11 @@ public class Revision {
         return valorPagar;
     }
 
+    /**
+     * Método getter que obtiene la matrícula del vehículo asociado a la revisión.
+     * @return Matrícula del vehículo asociado a la revisión.
+     */
+    
     public String getMatricula(){
         return matricula;
     }

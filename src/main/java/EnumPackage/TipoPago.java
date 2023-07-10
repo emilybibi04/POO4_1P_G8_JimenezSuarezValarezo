@@ -10,6 +10,17 @@ package EnumPackage;
  * @author emilyvalarezo
  */
 
+/**
+ * Enumeración que representa los diferentes tipos de pago.
+ */
+
 public enum TipoPago {
-    EFECTIVO, CRÉDITO
+    /**
+     * Pago por efectivo
+     */
+    EFECTIVO,
+    /**
+     * Pago pot crédito
+     */
+    CRÉDITO
 }
