@@ -6,8 +6,7 @@
 package MainPackage;
 import java.util.ArrayList;
 import java.util.Scanner;
-import EnumPackage.TipoCliente;
-import EnumPackage.Perfil;
+
 /**
  *
  * @author emilyvalarezo
@@ -17,13 +16,10 @@ public class SistemaVehicular {
     static ArrayList<Usuario> usuariosRegistrados = new ArrayList<>();
 
     public static void main(String[] args){
-        //ejecutar();
-        Vehiculo v = new Vehiculo("0923879161","GBV9034","CHEVROLET","ELANTRA",2018,"HWIK3457MSSJ083723","BLANCO");
-        Usuario cl = new Cliente("0972327367","Carolina", "Sabando",23,"csabando@gmail.com","csabando","dkioeiw2",Perfil.CLIENTE, TipoCliente.ESTRELLA, "538283736926233",25,v);
-        cl.consultarMultas();
+        ejecutarInterfaz();
     }
     
-    public static void ejecutar(){
+    public static void ejecutarInterfaz(){
         Scanner sc = new Scanner(System.in);
         System.out.println("+".repeat(50));
         System.out.println("              BIENVENIDO AL SISTEMA               ");
