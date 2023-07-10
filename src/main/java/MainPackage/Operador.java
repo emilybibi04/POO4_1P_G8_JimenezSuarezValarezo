@@ -32,17 +32,40 @@ import java.util.InputMismatchException;
 public class Operador extends Usuario {
     //atributo de instancia de 'Operador'
     private double sueldo;
-     
+    
+    /**
+     * Crea una instancia de Operador.
+     * @param cedula      el número de identificación del operador
+     * @param nombres     los nombres del operador
+     * @param apellidos   los apellidos del operador
+     * @param edad        la edad del operador
+     * @param correo      el correo electrónico del operador
+     * @param usuario     el nombre de usuario del operador
+     * @param contrasena  la contraseña del operador
+     * @param perfil      el perfil del operador
+     * @param sueldo      el sueldo del operador
+     */
+    
     public Operador(String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil, double sueldo){
         //invocación del constructor de la clase padre
         super(cedula, nombres, apellidos, edad, correo, usuario, contrasena, perfil);
         this.sueldo=sueldo;
      }
      
+    /**
+     * Método getter que obtiene el sueldo del operador.
+     * @return el sueldo del operador
+     */
+    
     public double getSueldo(){
        return sueldo;
     }
-    //sobreescritura del metodo opcionesMenu
+    
+    /**
+     * Sobrescribe el método opcionesMenu de la clase Usuario.
+     * Muestra un menú de opciones para el operador y realiza acciones según la opción seleccionada.
+     */
+    
     @Override
     public void opcionesMenu() {
     usuariosRegistrados = Utilitaria.cargarUsuario();
@@ -88,6 +111,11 @@ public class Operador extends Usuario {
         }
     } while (opcion != 4);
 }
+    
+    /**
+     * Permite al operador registrar pagos.
+     */
+    
     public void registrarPagos(){
         Scanner sc = new Scanner(System.in);
         System.out.println("--------------------------------------------------");
@@ -128,6 +156,12 @@ public class Operador extends Usuario {
         }
         
     }
+    
+    /**
+     * Permite al operador pagar multas.
+     * @param sc      el objeto Scanner para la entrada de datos
+     * @param cedula  el número de identificación del cliente
+     */
     
     public static void pagarMultas(Scanner sc, String cedula) {
         
@@ -203,6 +237,11 @@ public class Operador extends Usuario {
         }
     }    
     
+    /**
+     * Permite al operador pagar una revisión.
+     * @param sc      el objeto Scanner para la entrada de datos
+     * @param cedula  el número de identificación del cliente
+     */
     
     public static void pagarRevision(Scanner sc, String cedula) {
         ArrayList<Usuario> listaUsuarios=Utilitaria.cargarUsuario();
@@ -286,7 +325,10 @@ public class Operador extends Usuario {
     }
     
     
-    
+    /**
+     * Sobrescribe el método consultarMultas de la clase Usuario.
+     * Consulta y muestra las multas de los conductores registradas en el mes actual.
+     */
     
     @Override
     public void consultarMultas(){
@@ -331,6 +373,11 @@ public class Operador extends Usuario {
         }
     }
         
+    /**
+     * Permite al operador consultar usuarios.
+     * @param lista  la lista de usuarios
+     */
+    
     public void consultarUsuarios(ArrayList<Usuario> lista){
         System.out.println("--------------------------------------------------");
         System.out.printf("%32s","CONSULTAR USUARIOS");

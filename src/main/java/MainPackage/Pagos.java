@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author davidsuarez
  */
+
 public class Pagos {
     private String codigoPago;
     private String cedula;
@@ -32,6 +33,16 @@ public class Pagos {
     private double valorFinalPagar;
     private LocalDate fechaPago;
     private String razonPago;
+    
+    /**
+     * Crea una instancia de Pagos.
+     * @param codigoPago       el código único del pago
+     * @param cedula           el número de cédula del usuario
+     * @param valorPagar       el valor a pagar
+     * @param tipo             el tipo de pago
+     * @param valorFinalPagar  el valor final a pagar
+     * @param razonPago        la razón del pago
+     */
     
     public Pagos(String codigoPago, String cedula, double valorPagar, TipoPago tipo, double valorFinalPagar, String razonPago){
         this.codigoPago=codigoPago;
@@ -42,6 +53,10 @@ public class Pagos {
         this.fechaPago=LocalDate.now();
         this.razonPago=razonPago;
     }
+    
+    /**
+     * Registra el pago en el archivo "pagos.txt".
+     */
     
     public void registrarPagos(){
         try{

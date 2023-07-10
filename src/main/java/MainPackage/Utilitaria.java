@@ -14,6 +14,12 @@ import java.util.ArrayList;
  */
 
 public class Utilitaria {
+    
+    /**
+     * Carga los usuarios desde el archivo "usuarios.txt" y los devuelve en forma de ArrayList.
+     * @return una lista de usuarios
+     */
+    
     public static ArrayList<Usuario> cargarUsuario(){
         ArrayList<Usuario> usuariosArray = new ArrayList<>();
         ArrayList<String> datos = ManejoArchivo.LeeFichero("usuarios.txt");
@@ -115,6 +121,14 @@ public class Utilitaria {
         return usuariosArray;
     }
     
+    /**
+     * Comprueba si las credenciales de usuario son válidas.
+     * @param user  el nombre de usuario
+     * @param pass  la contraseña
+     * @param lista la lista de usuarios
+     * @return true si las credenciales son válidas, false en caso contrario
+     */
+    
     public static boolean comprobarUsuario(String user, String pass, ArrayList<Usuario> lista) {
         for (Usuario u : lista) {
             if (u.getUsuario().equals(user) && u.getContrasena().equals(pass)) {
@@ -123,6 +137,11 @@ public class Utilitaria {
         }
         return false; // Usuario no encontrado, retorna false
     }
+    
+    /**
+     * Comprueba el tipo de usuario y realiza la acción correspondiente.
+     * @param u el usuario
+     */
     
     public static void comprobarTipo(Usuario u){
         if(u instanceof Cliente){
@@ -135,6 +154,11 @@ public class Utilitaria {
         }
     }
     
+    /**
+     * Verifica si una cadena de texto representa un número entero.
+     * @param str la cadena de texto a verificar
+     * @return true si la cadena es un número entero, false en caso contrario
+     */
     
     public static boolean esEntero(String str) {
         if (str == null || str.isEmpty()) {
@@ -149,6 +173,12 @@ public class Utilitaria {
         
         return true;
     }
+    
+    /**
+     * Verifica si un cliente está registrado en el sistema.
+     * @param cedula el número de cédula del cliente
+     * @return true si el cliente está registrado, false en caso contrario
+     */
     
     public static boolean verificarCliente(String cedula){
         ArrayList<Usuario> lista=cargarUsuario();
