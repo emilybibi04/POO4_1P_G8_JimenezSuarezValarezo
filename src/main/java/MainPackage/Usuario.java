@@ -13,14 +13,14 @@ import EnumPackage.Perfil;
 
 public abstract class Usuario{
     
-    private String cedula;
-    private String nombres;
-    private String apellidos;
-    private int edad;
-    private String correo;
-    private String usuario;
-    private String contrasena;
-    private Perfil perfil;
+    protected String cedula;
+    protected String nombres;
+    protected String apellidos;
+    protected int edad;
+    protected String correo;
+    protected String usuario;
+    protected String contrasena;
+    protected Perfil perfil;
     
     public Usuario (String cedula, String nombres, String apellidos, int edad, String correo, String usuario, String contrasena, Perfil perfil){
         

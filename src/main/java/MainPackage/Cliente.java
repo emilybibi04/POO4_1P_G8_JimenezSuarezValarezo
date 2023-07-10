@@ -4,15 +4,15 @@
  */
 
 package MainPackage;
-import EnumPackage.TipoCliente;
-import EnumPackage.Perfil;
-import static MainPackage.SistemaVehicular.usuariosRegistrados;
+import EnumPackage.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.io.*;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +26,7 @@ public class Cliente extends Usuario {
     private String numTarjetaCred;
     private int puntosLicencia; 
     private Vehiculo vehiculo;
+    private Revision revision;
     
     //objetos necesarios para la ejecucion del código
     Scanner sc = new Scanner(System.in);
@@ -38,6 +39,7 @@ public class Cliente extends Usuario {
         this.numTarjetaCred = numTarjetaCred;
         this.puntosLicencia = puntosLicencia;
         this.vehiculo = vehiculo;
+        this.revision=new Revision();
     
     }
     public TipoCliente getTipoCliente(){
@@ -53,8 +55,7 @@ public class Cliente extends Usuario {
     do{  
         System.out.println("-".repeat(50));
         System.out.println("                 OPCIONES CLIENTE                 ");
-        System.out.println("-".repeat(50));
-        System.out.println(" ");
+        System.out.println("-".repeat(50)+"\n");
         System.out.println("1. Consultar Multas");
         System.out.println("2. Agendar Revisión técnica");
         System.out.println("3. Salir");
@@ -70,22 +71,30 @@ public class Cliente extends Usuario {
                         consultarMultas();
                         break;
                     case 2:
-                        //tu otro metodo de agendar revision tecnica
+                        agendarRevision();
                         break;
                     case 3:
                         System.out.println("Saliendo del programa...");
                         break;
                 }
             }
-        } catch (InputMismatchException e) { //validar que no ingrese caracteres diferentes de numeros
+            } catch (InputMismatchException e) { //validar que no ingrese caracteres diferentes de numeros
             System.out.println("Opción inválida. Por favor, ingrese un número válido.");
             sc.nextLine(); // Limpiar el búfer
             opcion = 0; // Establecer la opción en 0 para repetir el ciclo
-        }
-    } while (opcion != 3);
-}
-      
+            }
+        } while (opcion != 3);
+    }
 
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
+    public int getPuntosLicencia() {
+        return puntosLicencia;
+    }
+      
+    
 
     @Override
     //Sobreescritura del método toString()
@@ -99,19 +108,17 @@ public class Cliente extends Usuario {
         //Menú del método
         Scanner sc = new Scanner(System.in);
         System.out.println("-".repeat(50));
-        System.out.printf("                CONSULTA DE MULTAS                ");
-        System.out.println("-".repeat(50));
-        System.out.println(" ");
-        System.out.println("Ingrese su  matrícula o cédula: ");
+        System.out.println("                CONSULTA DE MULTAS                ");
+        System.out.println("-".repeat(50)+"\n");
+        System.out.print("Ingrese su  matrícula o cédula: ");
         String matri_ci = sc.nextLine();
-        sc.nextLine();
         
         ArrayList<String> lineas = ManejoArchivo.LeeFichero("multas.txt");
         ArrayList<String> multasC = new ArrayList<>();   
         
         //Verificar las multas que pertenecen al cliente, a través de su cédula
         for(String l : lineas){
-            String[] l2 = l.split(",");
+            String[] l2 = l.trim().split(",");
             if(matri_ci.equals(l2[0]) || matri_ci.equals(l2[1])){
                 multasC.add(l);
             } 
@@ -119,16 +126,16 @@ public class Cliente extends Usuario {
 
         //Formato de las multas
         System.out.println("-".repeat(50));
-        System.out.printf("                DETALLE DE MULTAS                 ");
+        System.out.println("                DETALLE DE MULTAS                 ");
         System.out.println("-".repeat(50));
         System.out.println(" ");
         System.out.println("CÉDULA | MATRÍCULA | INFRACCIÓN | VALOR A PAGAR | FECHA DE INFRACCIÓN | FECHA DE NOTIFICACIÓN | PUNTOS");
         
-        int saldo = 0;
+        double saldo = 0;
         for(String multas : multasC){
             String[] datos = multas.split(",");
-            saldo =+ Integer.valueOf(datos[3]);
-            System.out.printf("%6s | %6s | %6s | %6s | %6s | %6s | %6s",datos[0], datos[1], datos[2],datos[3],datos[4],datos[5],datos[6]);
+            saldo =+ Double.parseDouble(datos[3]);
+            System.out.printf("%6s | %6s | %6s | %6s | %6s | %6s | %6s\n",datos[0], datos[1], datos[2],datos[3],datos[4],datos[5],datos[6]);
         }
         
         System.out.println("TOTAL A PAGAR: " + saldo);
@@ -137,131 +144,145 @@ public class Cliente extends Usuario {
     }
     
     //Método AgendarRevision(). El método retornará un arreglo con los datos del horario que el cliente escogió
-    public ArrayList<String> AgendarRevision(){
+    public void agendarRevision(){
         
         System.out.println("--------------------------------------------------");
-        System.out.printf("%32s","AGENDAR REVISIÓN");
-        System.out.println("\n--------------------------------------------------");
+        System.out.printf("%32s\n","AGENDAR REVISIÓN");
+        System.out.println("--------------------------------------------------");
         
-        ArrayList<String> multas = ManejoArchivo.LeeFichero("multas.text");
-        System.out.println("Ingrese su placa: ");
-        String placa = sc.nextLine(); 
-        sc.nextLine();
+        ArrayList<String> multas = ManejoArchivo.LeeFichero("multas.txt");
         
         //Placas con multas
         ArrayList<String> placas_multas = new ArrayList<>();
         for(String l : multas){
             String[] l2 = l.split(",");
             placas_multas.add(l2[1]);
+        }
+        String placa;
+        boolean condicion;
+        do{
+            System.out.print("Ingrese su placa: ");
+            placa = sc.nextLine();
+            condicion=!vehiculo.getPlaca().equals(placa);
+            if(condicion)
+                System.out.println("Placa no registrada a su nombre, ingrese placa correcta");
+        }
+        while(condicion);
+        
+        ArrayList<String> revisiones=ManejoArchivo.LeeFichero("CitasAgendadas.txt");
+        boolean tieneRevision=false;
+        for(String linea: revisiones){
+            if(!linea.isEmpty()){
+                String[] datos=linea.trim().split(",");
+                if(datos[1].equals(this.cedula))
+                    tieneRevision=true;
+            }
+        }
+        
+        
+        if(placas_multas.contains(placa))
+            System.out.println("No puede agendar una revision, usted tiene multas pendientes por pagar");
+        else if(tieneRevision){
+            for(String linea:revisiones){
+                String[] datos=linea.trim().split(",");
+                if(datos[1].equals(cedula))
+                    this.setRevision(new Revision(datos[0],datos[1],datos[2],datos[3]));
+            }
+            System.out.println(this.nombres+" "+this.apellidos+", ya tiene una cita agendada para el "+revision.getFecha());
+            System.out.println("Valor a pagar: "+revision.valorRevision(this)+"\n");
+        }
+        else{
+            System.out.println("No tiene multas.\n");
+        
+            //Impresión de Horarios Disponibles
+            System.out.println("Horarios Disponibles");
+
+            ArrayList<String> horarios = ManejoArchivo.LeeFichero("HorariosRevision.txt");
+            ArrayList<String> opciones = new ArrayList<>(); //para tener una noción de las opciones de horarios
+
+            for(String horario : horarios){
+                if(!horario.equals("************************")){
+                    String[] datos = horario.trim().split(" ");
+                    String indice=datos[0].substring(0, datos[0].length() - 1);
+                    if(Utilitaria.esEntero(indice))
+                        opciones.add(indice);
+                }
+            }
             
-        }
-        
-        //Verificar si la placa tiene multas
-        if(placas_multas.contains(placa)){
-            System.out.println("Tiene multas pendientes por pagar");
-        } else{
-            System.out.println("No tiene multas.");
-        }
-        
-        //Impresión de Horarios Disponibles
-        System.out.println("Horarios Disponibles");
-        
-        ArrayList<String> horarios = ManejoArchivo.LeeFichero("HorariosRevisio.txt");
-        ArrayList<String> opciones = new ArrayList<>(); //para tener una noción de las opciones de horarios
-        
-        for(String horario : horarios){
-            String[] datos = horario.split(" ");
-            opciones.add(datos[0].substring(0, datos[0].length() - 1));
-            System.out.println(horario);
-        }
-        
-        //Pedir al cliente que elija una opción de horario
-        System.out.println("Elija una opción de horario");
-        String op = sc.nextLine();
-        sc.nextLine();
-        
-        //verificar que la opción introducida este entre las opciones
-        while(!opciones.contains(op)){
-            System.out.println("La opción no es correcta");
-            System.out.println("Elija una opción de horario: ");
-            op = sc.nextLine();
-        }
-        
-        
-        //Creacion del arreglo con los datos del horario escogido
-        ArrayList<String> horario_escodigo = new ArrayList<>();
-        //Array que recibe los datos para el archivo de 'CitasAgendadas'
-        ArrayList<String> citasAgendadas = new ArrayList<>();
-        
-        citasAgendadas.add(2, placa);
-        
-        for(String horario : horarios){
-            String[] datos = horario.split(" ");           
-            if(horario.contains(op)){
-                horario_escodigo.add(horario);
-                citasAgendadas.add(3, datos[1]);
+            for(String p:opciones){
+                int posicion=Integer.parseInt(p)-1;
+                System.out.println(horarios.get(posicion));
+            }
+
+            //Pedir al cliente que elija una opción de horario
+            System.out.println("Elija una opción de horario");
+            String op = sc.nextLine();
+
+            //verificar que la opción introducida este entre las opciones
+            while(!opciones.contains(op)){
+                System.out.println("La opción no es correcta");
+                System.out.print("Elija una opción de horario: ");
+                op = sc.nextLine();
+            }
+
+
+            //Creacion del arreglo con los datos del horario escogido
+            String[] horario_escogido=horarios.get(Integer.parseInt(op)-1).trim().split(" ");
+            //Array que recibe los datos para el archivo de 'CitasAgendadas'
+            String[] citaAgendada = new String[4];
+
+            citaAgendada[2]=placa;
+
+            citaAgendada[3]=horario_escogido[1];
+
+            /*Creacion de un numero aleatorio de 4 digitos para el 'CodigoUnico' 
+            del horario. A su vez se agrega este dato al array de citasAgendadas*/
+            GeneracionCodigoUnico cd = new GeneracionCodigoUnico();
+            int cod = cd.generarCodigoUnico();
+            citaAgendada[0]=String.valueOf(cod);
+            
+            ArrayList<String> vehiculos = ManejoArchivo.LeeFichero("vehiculos.txt");    
                 
+            for(String vehiculo : vehiculos){
+                String[] dato = vehiculo.trim().split(",");
+                if(dato[1].equals(placa)){
+                    citaAgendada[1]=dato[0];
+                }
+            }
+    
+            setRevision(new Revision(String.valueOf(cod),citaAgendada[1],citaAgendada[2],citaAgendada[3]));
+            
+            //String de los datos del array para poderlos escribir directamente en el archivo
+            String cita = citaAgendada[0]+","+citaAgendada[1]+","+citaAgendada[2]+","+citaAgendada[3];
+            //Escritura de archivo con horarios escogidos;
+            revision.registrarRevision(cita);
+            
+            System.out.println(this.nombres+" "+this.apellidos+", se ha agendado su cita para el "+horario_escogido[1]+" a las "+horario_escogido[2]);
+            System.out.println("Valor a pagar: "+revision.valorRevision(this)+"\n");
+            System.out.println("Puede pagar su cita hasta 24 horas antes de la cita.\nDe lo contrario la cita se cancelara.");
+            
+            try {
+                Path ruta = Paths.get("HorariosRevision.txt"); // Ruta al archivo original
+              
+                for(String line:horarios){
+                    if(!line.equals("************************")){
+                        String[] datos=line.trim().split(" ");
+                        String pos=datos[0].substring(0, datos[0].length() - 1);
+                        if(pos.equals(op))
+                            horarios.set(Integer.parseInt(pos) - 1, "************************");
+                    }
+                }
+
+                Files.write(ruta, horarios);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        
-        /*Creacion de un numero aleatorio de 4 digitos para el 'CodigoUnico' 
-        del horario. A su vez se agrega este dato al array de citasAgendadas*/
-        GeneracionCodigoUnico cd = new GeneracionCodigoUnico();
-        int cod = cd.generarCodigoUnico();
-        citasAgendadas.add(0, String.valueOf(cod));
-        
-        //lectura de archivo multas.txt para obtener la cédula del cliente segun la placa
-        ArrayList<String> mult = new ArrayList<>();
-        for(String multa : mult){
-            String[] dato = multa.split(",");
-            if(dato[1].equals(placa)){
-                citasAgendadas.add(1, dato[0]);
-            }
-        }
-        
-        //String de los datos del array para poderlos escribir directamente en el archivo
-        StringBuilder sb = new StringBuilder();
-        for(String dato : citasAgendadas){
-            sb.append(dato).append(", ");
-        }
-        
-        // Eliminar la última coma y el espacio
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 2);  
-        }
-        
-        
-        //Escritura de archivo con horarios escogidos;
-        
-        try{
-            File f = new File("CitasAgendadas.txt");
-            FileWriter fw = new FileWriter(f);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            
-            //para escribir los datos del horario en el archivo
-            pw.write(sb.toString());
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "ha sucedido un error"+e);
-        }
-     
-        //retorno del arreglo
-        return horario_escodigo;
     }
     
-    //metodo para calcular el valor a pagar de la revision. El metodo recibe un cliente 
-    public int valorRevision(Cliente c){
-        int base = 150;
-        int valorPagar = 0;
-        
-        //verificar el tipo de cliente que es
-        if(c.tipo == TipoCliente.ESTRELLA){
-            valorPagar = base - base*(20/100);
-        } else if(c.tipo == TipoCliente.ESTANDAR){
-            valorPagar = base + (c.puntosLicencia*10);
-        }
-        return valorPagar;
+    public void setRevision(Revision r){
+        this.revision=r;
     }
     
     
