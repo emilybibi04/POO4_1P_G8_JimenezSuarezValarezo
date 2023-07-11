@@ -189,7 +189,7 @@ public class Cliente extends Usuario {
         double saldo = 0;
         for(String multas : multasC){
             String[] datos = multas.split(",");
-            saldo =+ Double.parseDouble(datos[3]);
+            saldo += Double.parseDouble(datos[3]);
             System.out.printf("%6s | %6s | %6s | %6s | %6s | %6s | %6s\n",datos[0], datos[1], datos[2],datos[3],datos[4],datos[5],datos[6]);
         }
         
