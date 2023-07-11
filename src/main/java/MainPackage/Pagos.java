@@ -12,14 +12,6 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
-import EnumPackage.TipoPago;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author davidsuarez

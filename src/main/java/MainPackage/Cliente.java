@@ -153,17 +153,29 @@ public class Cliente extends Usuario {
         System.out.println("-".repeat(50));
         System.out.println("                CONSULTA DE MULTAS                ");
         System.out.println("-".repeat(50)+"\n");
-        System.out.print("Ingrese su  matrícula o cédula: ");
-        String matri_ci = sc.nextLine();
+        String matri_ci;
+        boolean check=true;
         
         ArrayList<String> lineas = ManejoArchivo.LeeFichero("multas.txt");
         ArrayList<String> multasC = new ArrayList<>();   
         
+        
+        do {
+            System.out.print("Ingrese su matrícula o cédula: ");
+            matri_ci = sc.nextLine();
+            if(matri_ci.equals(this.cedula) || matri_ci.equals(vehiculo.getPlaca()))
+                check=false;  
+            
+        } while (check==true);
+        
+       
+        
         //Verificar las multas que pertenecen al cliente, a través de su cédula
         for(String l : lineas){
-            String[] l2 = l.trim().split(",");
-            if(matri_ci.equals(l2[0]) || matri_ci.equals(l2[1])){
-                multasC.add(l);
+            if(!l.equals("************************") && !l.replace("\n", "").isEmpty()){
+                String[] l2 = l.trim().split(",");
+                if(matri_ci.equals(l2[0]) || matri_ci.equals(l2[1]))
+                    multasC.add(l);
             } 
         }
 
@@ -202,8 +214,10 @@ public class Cliente extends Usuario {
         //Placas con multas
         ArrayList<String> placas_multas = new ArrayList<>();
         for(String l : multas){
-            String[] l2 = l.split(",");
-            placas_multas.add(l2[1]);
+            if(!l.equals("************************") && !l.replace("\n", "").isEmpty()){
+                String[] l2 = l.trim().split(",");
+                placas_multas.add(l2[1]);
+            }
         }
         String placa;
         boolean condicion;
@@ -219,7 +233,7 @@ public class Cliente extends Usuario {
         ArrayList<String> revisiones=ManejoArchivo.LeeFichero("CitasAgendadas.txt");
         boolean tieneRevision=false;
         for(String linea: revisiones){
-            if(!linea.isEmpty()){
+            if(!linea.replace("\n", "").isEmpty()){
                 String[] datos=linea.trim().split(",");
                 if(datos[1].equals(this.cedula))
                     tieneRevision=true;
@@ -231,9 +245,11 @@ public class Cliente extends Usuario {
             System.out.println("No puede agendar una revision, usted tiene multas pendientes por pagar");
         else if(tieneRevision){
             for(String linea:revisiones){
-                String[] datos=linea.trim().split(",");
-                if(datos[1].equals(cedula))
-                    this.setRevision(new Revision(datos[0],datos[1],datos[2],datos[3]));
+                if(!linea.replace("\n", "").isEmpty()){
+                    String[] datos=linea.trim().split(",");
+                    if(datos[1].equals(cedula))
+                        this.setRevision(new Revision(datos[0],datos[1],datos[2],datos[3]));
+                }
             }
             System.out.println(this.nombres+" "+this.apellidos+", ya tiene una cita agendada para el "+revision.getFecha());
             System.out.println("Valor a pagar: "+revision.valorRevision(this)+"\n");
@@ -248,7 +264,7 @@ public class Cliente extends Usuario {
             ArrayList<String> opciones = new ArrayList<>(); //para tener una noción de las opciones de horarios
 
             for(String horario : horarios){
-                if(!horario.equals("************************")){
+                if(!horario.equals("************************") && !horario.replace("\n", "").isEmpty()){
                     String[] datos = horario.trim().split(" ");
                     String indice=datos[0].substring(0, datos[0].length() - 1);
                     if(Utilitaria.esEntero(indice))
@@ -312,7 +328,7 @@ public class Cliente extends Usuario {
                 Path ruta = Paths.get("HorariosRevision.txt"); // Ruta al archivo original
               
                 for(String line:horarios){
-                    if(!line.equals("************************")){
+                    if(!line.equals("************************") || !line.replace("\n", "").isEmpty()){
                         String[] datos=line.trim().split(" ");
                         String pos=datos[0].substring(0, datos[0].length() - 1);
                         if(pos.equals(op))

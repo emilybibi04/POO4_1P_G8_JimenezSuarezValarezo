@@ -70,7 +70,7 @@ public class Operador extends Usuario {
     public void opcionesMenu() {
     usuariosRegistrados = Utilitaria.cargarUsuario();
     Scanner sc = new Scanner(System.in);
-    int opcion;
+    String opcion;
 
     // Opciones para el Usuario Cliente
     do {
@@ -83,33 +83,27 @@ public class Operador extends Usuario {
         System.out.println("4. Salir");
         System.out.print("Ingrese el número de la opción que desea: ");
 
-        try {
-            opcion = sc.nextInt();
-            sc.nextLine();
-            if (opcion < 1 || opcion > 4) { //validar que solo ingrese numeros del 1-4
+            opcion = sc.nextLine();
+            if (!opcion.equals("1") && !opcion.equals("2") && !opcion.equals("3") && !opcion.equals("4"))  { //validar que solo ingrese numeros del 1-4
                 System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
             } else {
                 switch (opcion) {
-                    case 1:
+                    case "1":
                         registrarPagos();
                         break;
-                    case 2:
+                    case "2":
                         consultarMultas();
                         break;
-                    case 3:
+                    case "3":
                         consultarUsuarios(usuariosRegistrados);
                         break;
-                    case 4:
+                    case "4":
                         System.out.println("Saliendo del programa...");
                         break;
                 }
             }
-        } catch (InputMismatchException e) { //validar que no ingrese caracteres diferentes de numeros
-            System.out.println("Opción inválida. Por favor, ingrese un número válido.");
-            sc.nextLine(); // Limpiar el búfer
-            opcion = 0; // Establecer la opción en 0 para repetir el ciclo
-        }
-    } while (opcion != 4);
+
+    } while (!opcion.equals("4"));
 }
     
     /**
@@ -123,7 +117,7 @@ public class Operador extends Usuario {
         System.out.println("\n--------------------------------------------------");
         System.out.print("\n Ingrese el numero de cédula del cliente: ");
         String cedula=sc.nextLine();
-        int opcion;
+        String opcion;
         boolean check= Utilitaria.verificarCliente(cedula);
         
         if (check){
@@ -133,24 +127,22 @@ public class Operador extends Usuario {
                 System.out.println("2. Revisión");
                 System.out.println("3. Salir");
                 System.out.print("Ingrese el número de la opción que desea: ");
-                opcion = sc.nextInt();
-                sc.nextLine();
-
+                opcion = sc.nextLine();
                 switch (opcion) {
-                    case 1:
+                    case "1":
                         pagarMultas(sc,cedula);
                         break;
-                    case 2:
+                    case "2":
                         pagarRevision(sc,cedula);
                         break;
-                    case 3:
+                    case "3":
                         System.out.println("Saliendo del programa...");
                         break;
                     default:
                         System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
                         break;
                 }
-            } while (opcion != 3);
+            } while (!opcion.equals("3") && !opcion.equals("1") && !opcion.equals("2"));
         } else{
             System.out.println("El número de cédula no corresponde a un cliente");
         }
@@ -182,14 +174,21 @@ public class Operador extends Usuario {
             String metodo;
             ArrayList<String> opciones=new ArrayList<>();
             opciones.add("1"); opciones.add("2");
+            
+            boolean check = false;
             do{
                 System.out.println("1. Efectivo");
                 System.out.println("2. Tarjeta de crédito");
+                System.out.print("Ingrese el número de la opción que desea: ");
                 metodo = sc.nextLine();
-                if(!opciones.contains(metodo))
+                if(!opciones.contains(metodo)){
                     System.out.println("Ingrese una opcion valida");
+                    check = false;
+                }
+                else if (opciones.contains(metodo))
+                    check=true;                      
             }
-            while(!opciones.contains(metodo));
+            while(check==false);
             if (metodo.trim().equals("2")) {
                 valorPagarFinal += valorPagar * 0.1; 
                 tipoPago=TipoPago.CRÉDITO;
@@ -201,6 +200,7 @@ public class Operador extends Usuario {
                 System.out.println("¿Desea proceder con el pago?: ");
                 System.out.println("1. Sí");
                 System.out.println("2. No");
+                System.out.print("Ingrese el número de la opción que desea: ");
                 decidirPagar = sc.nextLine();
                 if(!opciones.contains(decidirPagar))
                     System.out.println("Ingrese una opcion valida");
@@ -213,7 +213,7 @@ public class Operador extends Usuario {
                 Path ruta = Paths.get("multas.txt"); // Ruta al archivo original
               
                 for(String line:multas){
-                    if(!line.equals("************************")){
+                    if(!line.equals("************************") && !line.replace("\n", "").isEmpty()){
                         String[] datos=line.trim().split(",");
                         if(datos[0].equals(cedula))
                             multas.set(multas.indexOf(line), "************************");
@@ -253,7 +253,7 @@ public class Operador extends Usuario {
         }
         ArrayList<String> lista=ManejoArchivo.LeeFichero("CitasAgendadas.txt");
         for(String linea:lista){
-            if(!linea.isEmpty()){
+            if(!linea.replace("\n", "").isEmpty()){
                 String[] datos=linea.trim().split(",");
                 if(datos[1].equals(cedula)){
                         revision=new Revision(datos[0],datos[1],datos[2],datos[3]);
@@ -265,9 +265,9 @@ public class Operador extends Usuario {
         ArrayList<String> listaPagos=ManejoArchivo.LeeFichero("pagos.txt");
         boolean yaPago=false;
         for(String linea:listaPagos){
-            if(!linea.isEmpty()){
+            if(!linea.replace("\n", "").isEmpty()){
                 String[] datos=linea.trim().split(",");
-                if(datos[1].equals(cliente.getCedula()))
+                if(datos[1].equals(cliente.getCedula()) && datos[6].equals("REVISION"))
                     yaPago=true;
             }
         }
@@ -287,6 +287,7 @@ public class Operador extends Usuario {
             do{
                 System.out.println("1. Efectivo");
                 System.out.println("2. Tarjeta de crédito");
+                System.out.print("Ingrese el número de la opción que desea: ");
                 metodo = sc.nextLine();
                 if(!opciones.contains(metodo))
                     System.out.println("Ingrese una opcion valida");
@@ -304,6 +305,7 @@ public class Operador extends Usuario {
                 System.out.println("¿Desea proceder con el pago?: ");
                 System.out.println("1. Sí");
                 System.out.println("2. No");
+                System.out.print("Ingrese el número de la opción que desea: ");
                 decidirPagar = sc.nextLine();
                 if(!opciones.contains(decidirPagar))
                     System.out.println("Ingrese una opcion valida");
@@ -349,7 +351,7 @@ public class Operador extends Usuario {
         //cargar el ArraList de las multas  
         ArrayList<String> multas = ManejoArchivo.LeeFichero("multas.txt");
         for(String linea: multas){ 
-            if(!linea.equals("************************")){
+            if(!linea.equals("************************") && !linea.replace("\n", "").isEmpty()){
                 String[] elemento = linea.trim().split(",");
                 String cedula= elemento[0];
                 String nombre="";
