@@ -391,7 +391,7 @@ public class Operador extends Usuario {
                 System.out.println(operador.getNombres()+" "+operador.getApellidos()+" | "+operador.getPerfil()+ " | "+operador.getSueldo());
             } else if(u instanceof Cliente){
                 Cliente cliente = (Cliente) u;
-                System.out.println(cliente.getNombres()+" "+cliente.getApellidos()+ " | " +cliente.getPerfil() +" " +cliente.getTipoCliente()+" | "+cliente.getCedula());
+                System.out.println(cliente.getNombres()+" "+cliente.getApellidos()+ " | " +cliente.getPerfil() +" " +cliente.getTipo()+" | "+cliente.getCedula());
             }
         }
     }

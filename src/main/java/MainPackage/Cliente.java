@@ -57,15 +57,6 @@ public class Cliente extends Usuario {
         this.vehiculo = vehiculo;
         this.revision=new Revision();
     }
-    
-    /**
-     * Método getter que obtiene el tipo de cliente.
-     * @return El tipo de cliente.
-     */
-    
-    public TipoCliente getTipoCliente(){
-        return tipo;
-    }
 
     /**
      * Método sobreescrito que permite observar el Menú de Clientes.
@@ -74,7 +65,6 @@ public class Cliente extends Usuario {
     
     @Override
     public void opcionesMenu(){
-      Scanner sc = new Scanner(System.in);
       int opcion;
       
       //Opciones para el Usuario Cliente
@@ -111,13 +101,13 @@ public class Cliente extends Usuario {
             }
         } while (opcion != 3);
     }
-
+    
     /**
-     * Método getter que obtiene el tipo de usuario.
-     * @return El tipo de usuario.
+     * Método getter que obtiene el tipo de cliente.
+     * @return El tipo de cliente.
      */
     
-    public TipoCliente getTipo() {
+    public TipoCliente getTipo(){
         return tipo;
     }
 
@@ -138,7 +128,7 @@ public class Cliente extends Usuario {
 
     @Override
     public String toString(){
-        return "Tipo de cliente: "+ tipo +"/nPuntos de Licencia: "+ puntosLicencia+ "/nVehiculo:/n"+ vehiculo.toString();
+        return "Tipo de cliente: " + tipo + " - Puntos de Licencia: " + puntosLicencia + " - Vehiculo: " + vehiculo.toString();
     }
     
     /**
